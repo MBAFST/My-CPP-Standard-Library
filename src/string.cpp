@@ -98,7 +98,7 @@ bool String::operator==(const String& str) {
     return !strcmp(this->str, str.str);
 }
 
-char& String::operator[](int index) {
+char& String::operator[](size_t index) {
     if (index < 0 || index >= strlen(str))
         throw Exception("Array out of bound!");
     return *(str + index);

@@ -24,7 +24,7 @@ public:
     String& operator+=(const String& str);
     bool operator==(const char *str);
     bool operator==(const String& str);
-    char& operator[](int index);
+    char& operator[](size_t index);
     ~String();
 
     friend std::ostream& operator<<(std::ostream& os, const String& str);
