@@ -1,9 +1,9 @@
-#include "exception.hpp"
-#include "string.hpp"
+#include "stl/exception.hpp"
+#include "stl/string.hpp"
 
-#include <stdlib.h>
-#include <string.h>
-#include <stdio.h>
+#include <cstdlib>
+#include <cstring>
+#include <cstdio>
 
 String String::reverse(const char *str) {
     char *tmp = (char *)malloc(strlen(str) + 1);

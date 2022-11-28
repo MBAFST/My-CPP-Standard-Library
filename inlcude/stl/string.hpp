@@ -1,7 +1,7 @@
 #ifndef __STRING_HPP__
 #define __STRING_HPP__
 
-#include <string.h>
+#include <cstring>
 #include <ostream>
 
 class String {
