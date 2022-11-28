@@ -13,4 +13,6 @@ char *Exception::getMessage() const {
     return this->msg;
 }
 
-Exception::~Exception() { }
+Exception::~Exception() {
+    free(this->msg);
+}
