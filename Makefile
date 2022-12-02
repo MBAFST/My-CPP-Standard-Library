@@ -3,7 +3,7 @@ INC=-I./include
 default:    main
 
 main:
-	g++ -Wall $(INC) src/*.cpp -o main
+	g++ -Wall $(INC) src/*.cpp main.cpp -o main
 
 build:
 	g++ -Wall $(INC) -c src/exception.cpp src/string.cpp

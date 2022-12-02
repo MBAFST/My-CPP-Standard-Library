@@ -3,42 +3,101 @@
 
 #include <cstdlib>
 #include <iostream>
+#include "stl/list.hpp"
 
 template <class T>
-class Vector {
+class Vector : public List<T> {
 private:
     T *items;
-    u_int64_t length;
-    u_int64_t size;
+    uint64_t length;
+    uint64_t max;
 public:
     Vector() {
-        items = (T *)malloc(2 * sizeof(T *));
+        this->max = 10;
+        this->items = (T *)malloc(this->max * sizeof(T *));
     }
 
-    Vector(usize size) {
-        items = (T *)malloc(size * sizeof(T *));
+    Vector(uint64_t max) {
+        this->max = max;
+        this->items = (T *)malloc(this->max * sizeof(T *));
     }
 
-    void add(T item);
-    void add(uint64_t index, T item);
-    void addAll(Vector vector);
-    void addAll(uint64_t index, Vector vector);
-    void clear();
-    Vector& clone();
-    bool contains(T item);
-    T& get(uint64_t index);
-    uint64_t indexOf(T item);
-    bool isEmpty();
-    uint64_t lastIndexOf(T item);
-    void remove(T item);
-    void removeAll(Vector vector);
-    void removeRange(int fromIndex, int toIndex);
-    void set(uint64_t index, T item);
-    uint64_t size();
-    Vector subList(int fromIndex, int toIndex);
-    T* toArray();
-    static T* toArray(T* items);
-    T get(uint64_t index);
+    void add(const T& item) override {
+        // todo
+        if (this->length == this->max) {
+            this->max = this->max * 2;
+            this->items = (T *)realloc(this->items, this->max * sizeof(T *)); 
+        }
+        *(this->items + this->length) = item;
+        this->length++;
+    }
+
+    void clear() override {
+        this->length = 0;
+        this->max = 10;
+        free(items);
+    }
+
+    Vector<T>& clone() const {
+        // @todo
+        Vector<T> *tmp = new Vector<T>();
+        for (uint64_t i = 0; i < this->length; i++)
+            tmp->add(this->get(i));
+        return *tmp;
+    }
+
+    bool contains(const T& item) const override {
+        // @todo
+        for (uint64_t i = 0; i < this->length; i++)
+            if (this->get(i) == item)
+                return true;
+        return false;
+    }
+
+    T get(uint64_t index) const override {
+        // @todo
+        return *(this->items + index);
+    }
+
+    bool isEmpty() const override {
+        // @todo
+        return this->length == 0;
+    }
+
+    int64_t indexOf(const T& item) const override {
+        // @todo
+        for (uint64_t i = 0; i < this->length; i++)
+            if (this->get(i) == item)
+                return i;
+        return -1;
+    }
+
+    int64_t lastIndexOf(const T& item) const override {
+        // @todo
+        for (int64_t i = this->length - 1; i > -1 ; i--)
+            if (this->get(i) == item)
+                return i;
+        return -1;
+    }
+
+    void remove(const T& item) override {
+        // @todo
+    }
+
+    uint64_t size() const override {
+        // @todo
+        return this->length;
+    }
+
+    T *toArray() const override {
+        // @todo
+        T *tmp = (T *)malloc(this->length * sizeof(T *));
+
+        for (uint64_t i = 0; i < this->length; i++)
+            *(tmp + i) = *(this->items + i);
+
+        return tmp;
+    }
 
     ~Vector() {
         free(items);

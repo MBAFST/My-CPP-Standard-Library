@@ -14,6 +14,7 @@ public:
     String(const int a);
     String(const char *str);
     String(const String& str);
+    String split(const char *pattern);
     const char *c_str() const;
     uint32_t length() const;
     String& operator=(const char *str);
